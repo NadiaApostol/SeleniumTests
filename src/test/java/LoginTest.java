@@ -18,7 +18,6 @@ public class LoginTest {
         FlightFingerPage objFlightFingerPage = new FlightFingerPage(driver);
         assert objFlightFingerPage.displayedImgFlightFinger();
         driver.close();
-
     }
 
     @DataProvider(name = "LoginNegative")
@@ -29,6 +28,7 @@ public class LoginTest {
                 { "test", "test" },
                 { "test3", "test3" }
         };
+        
     }
 
 
