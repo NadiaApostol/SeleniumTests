@@ -31,6 +31,7 @@ public class LoginTest {
         };
     }
 
+
     @Test(dataProvider = "LoginNegative")
     public void negativeLogin(String login, String password){
         System.setProperty("webdriver.chrome.driver", "C:\\xyz\\TestyUI\\src\\main\\resources\\chromedriver.exe");
