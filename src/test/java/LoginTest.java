@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -17,7 +18,6 @@ public class LoginTest {
 
         FlightFingerPage objFlightFingerPage = new FlightFingerPage(driver);
         assert objFlightFingerPage.displayedImgFlightFinger();
-        driver.close();
     }
 
     @DataProvider(name = "LoginNegative")
@@ -28,10 +28,8 @@ public class LoginTest {
                 { "test", "test" },
                 { "test3", "test3" }
         };
-        
+
     }
-
-
     @Test(dataProvider = "LoginNegative")
     public void negativeLogin(String login, String password){
         System.setProperty("webdriver.chrome.driver", "C:\\xyz\\TestyUI\\src\\main\\resources\\chromedriver.exe");
