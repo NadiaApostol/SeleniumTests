@@ -17,7 +17,7 @@ public class SelectCitiesTest {
 
         LoginPage objLoginPage=new LoginPage(driver);
         objLoginPage.login("tutorial","tutorial");
-    };
+    }
 
     @DataProvider(name = "selectCities")
     public Object[][] dataProvider() {
