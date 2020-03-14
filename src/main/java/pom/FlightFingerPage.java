@@ -1,3 +1,5 @@
+package pom;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -57,7 +59,7 @@ public class FlightFingerPage {
     WebElement airline;
 
     @FindBy(name = "findFlights")
-    WebElement findFlights;
+    public WebElement findFlights;
 
     public void selectCities(String cityFrom, String cityTo){
         Select fromPort = new Select(this.fromPort);

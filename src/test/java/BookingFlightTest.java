@@ -5,8 +5,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pom.BookAflightPage;
+import pom.FlightFingerPage;
+import pom.LoginPage;
+import pom.SelectFlightPage;
 
-public class SelectCitiesTest {
+public class BookingFlightTest {
     WebDriver driver;
 
     @BeforeClass
@@ -37,6 +41,21 @@ public class SelectCitiesTest {
         objFlightFingerPage.selectCities(cityFrom, cityTo);
          SelectFlightPage objSelectFlightPage = new SelectFlightPage(driver);
         Assert.assertEquals(objSelectFlightPage.getTextCityToCity(),cityFrom +" to "+ cityTo);
+
+    }
+
+    @Test
+    public void verifyTotalPrice(){
+        driver.get("http://newtours.demoaut.com/mercuryreservation.php");
+
+        SelectFlightPage objSelectFlightPage = new SelectFlightPage(driver);
+        FlightFingerPage objFlightFingerPage = new FlightFingerPage(driver);
+
+        objFlightFingerPage.findFlights.click();
+
+        int totalPrice = objSelectFlightPage.getFlightOption(1) + objSelectFlightPage.getFlightOption(5);
+        BookAflightPage objBookAflightPage = objSelectFlightPage.continueTo();
+        Assert.assertEquals(objBookAflightPage.getNetPrice(), totalPrice);
 
     }
 

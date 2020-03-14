@@ -1,3 +1,5 @@
+package pom;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +31,6 @@ public class LoginPage {
     }
 
     @FindBy(xpath = "//table[@align='center']//table//a")
-    List<WebElement> sideMenuItems;
+    public List<WebElement> sideMenuItems;
 
 }
