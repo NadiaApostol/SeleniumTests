@@ -1,19 +1,29 @@
+import io.qameta.allure.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+
+import org.testng.annotations.*;
+import pom.FlightFingerPage;
+import pom.LoginPage;
 
 public class LoginTest {
-    @Test
-    public void login(){
-        System.setProperty("webdriver.chrome.driver", "C:\\xyz\\TestyUI\\src\\main\\resources\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://newtours.demoaut.com/");
+    private WebDriver driver;
+    private LoginPage objLoginPage;
 
-        LoginPage objLoginPage = new LoginPage(driver);
+    @BeforeMethod
+    public void signIn() {
+        System.setProperty("webdriver.chrome.driver", "C:\\xyz\\TestyUI\\src\\main\\resources\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("http://newtours.demoaut.com/");
+        objLoginPage = new LoginPage(driver);
+    }
+
+    @Test(priority = 0, description="Pass Login Scenario with true username and password")
+   // @Description("Test Description: Login test with true username and true password")
+    public void login(){
+
         objLoginPage.login("tutorial", "tutorial");
 
         FlightFingerPage objFlightFingerPage = new FlightFingerPage(driver);
@@ -30,18 +40,17 @@ public class LoginTest {
         };
 
     }
-    @Test(dataProvider = "LoginNegative")
+    @Test(dataProvider = "LoginNegative", priority = 0, description="Invalid Login Scenario with wrong username and password")
+    @Description("Login test with wrong username and wrong password")
     public void negativeLogin(String login, String password){
-        System.setProperty("webdriver.chrome.driver", "C:\\xyz\\TestyUI\\src\\main\\resources\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://newtours.demoaut.com/");
 
-        LoginPage objLoginPage = new LoginPage(driver);
         objLoginPage.login(login, password);
-
+// Element is called directly without pom because it is single element from this page.
         WebElement signOn = driver.findElement(By.xpath("//img[@src='/images/masts/mast_signon.gif']"));
         assert signOn.isDisplayed();
-        driver.close();
-
+    }
+    @AfterMethod
+    public void close(){
+        driver.quit();
     }
 }
