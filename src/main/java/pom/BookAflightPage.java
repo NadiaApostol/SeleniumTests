@@ -1,5 +1,6 @@
 package pom;
 
+import helpers.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,42 +9,43 @@ import org.openqa.selenium.support.PageFactory;
 public class BookAflightPage {
     WebDriver driver;
 
+    @FindBy(xpath = "//img[@src='/images/masts/mast_book.gif']")
+    private WebElement imgBookAflight;
+
+    @FindBy(xpath = "(//*[contains(text(),'$')])[1]")
+    private WebElement taxes;
+
+    @FindBy(xpath = "(//*[contains(text(),'$')])[2]")
+    private WebElement totalPrice;
+
+    @FindBy(name = "cc_frst_name")
+    private WebElement firstName;
+
+    @FindBy(name = "cc_last_name")
+    private WebElement lastName;
+
+    @FindBy(name = "billAddress1")
+    private WebElement address;
+
+    @FindBy(name = "billCity")
+    private WebElement city;
+
+    @FindBy(name = "billState")
+    private WebElement stateProvince;
+
+    @FindBy(name = "billZip")
+    private WebElement postalCode;
+
+    @FindBy(name = "buyFlights")
+    private WebElement buyFlight;
+
     public BookAflightPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//img[@src='/images/masts/mast_book.gif']")
-    WebElement imgBookAflight;
-
-    @FindBy(xpath = "(//*[contains(text(),'$')])[1]")
-    WebElement taxes;
-
-    @FindBy(xpath = "(//*[contains(text(),'$')])[2]")
-    WebElement totalPrice;
-
-    @FindBy(name = "cc_frst_name")
-    WebElement firstName;
-
-    @FindBy(name = "cc_last_name")
-    WebElement lastName;
-
-    @FindBy(name = "billAddress1")
-    WebElement address;
-
-    @FindBy(name = "billCity")
-    WebElement city;
-
-    @FindBy(name = "billState")
-    WebElement stateProvince;
-
-    @FindBy(name = "billZip")
-    WebElement postalCode;
-
-    @FindBy(name = "buyFlights")
-    WebElement buyFlight;
-
     public boolean pageDisplayed(){
+
         return imgBookAflight.isDisplayed();
     }
 
@@ -61,21 +63,10 @@ public class BookAflightPage {
 
     public int getNetPrice() {
         String textTaxes = taxes.getText();
+        int taxesNumber = Helper.getAmoundFromText(textTaxes);
 
-        int indexTaxes = textTaxes.indexOf("$");
-        String textAmountTaxes = textTaxes.substring(indexTaxes + 1);
-        int taxesNumber = Integer.parseInt(textAmountTaxes);
-
-        System.out.println(taxesNumber);
         String textTotalPrice = totalPrice.getText();
-        System.out.println(textTotalPrice);
-
-        int indexTotalPrice = textTotalPrice.indexOf("$");
-        System.out.println(indexTotalPrice);
-
-        String textAmountTotalPrice = textTotalPrice.substring(indexTotalPrice + 1);
-        int totalPriceNumber = Integer.parseInt(textAmountTotalPrice);
-        System.out.println(totalPriceNumber);
+        int totalPriceNumber = Helper.getAmoundFromText(textTotalPrice);
 
         return totalPriceNumber - taxesNumber;
     }

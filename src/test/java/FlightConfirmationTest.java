@@ -1,24 +1,8 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pom.*;
 
-public class FlightConfirmationTest {
-    WebDriver driver;
-    LoginPage objLoginPage;
-
-    @BeforeClass
-    public void signIn() {
-        System.setProperty("webdriver.chrome.driver", "C:\\xyz\\TestyUI\\src\\main\\resources\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("http://newtours.demoaut.com/");
-
-        objLoginPage = new LoginPage(driver);
-        objLoginPage.login("tutorial", "tutorial");
-    }
+public class FlightConfirmationTest extends BaseTest{
 
     @Test
     public void verifyPaymentDetails() {
@@ -29,17 +13,16 @@ public class FlightConfirmationTest {
         FlightConfirmationPage objFlightConfirmationPage = new FlightConfirmationPage(driver);
 
         objFlightFingerPage.findFlights.click();
+        assert objSelectFlightPage.selectPageDisplayed();
+
         objSelectFlightPage.buttonContinue.click();
+        assert objBookAflightPage.pageDisplayed();
 
         String textDataForm = objBookAflightPage.fillInForm("Nadia", "Apostol");
         assert objFlightConfirmationPage.pageFlightConfirmationDisplayed();
+
         Assert.assertEquals(textDataForm, objFlightConfirmationPage.getTextInformationBilledTo());
 
-    }
-
-    @AfterClass
-    public void close() {
-        driver.close();
     }
 
 }

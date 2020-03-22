@@ -5,13 +5,21 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import sun.security.util.Password;
 
 public class FlightFingerPage {
     WebDriver driver;
 
     @FindBy(xpath = "//img[@src='/images/masts/mast_flightfinder.gif']")
-    WebElement imgFlightFinger;
+    private WebElement imgFlightFinger;
+
+    @FindBy(name = "fromPort")
+    private WebElement fromPort;
+
+    @FindBy(name = "toPort")
+    private WebElement toPort;
+
+    @FindBy(name = "findFlights")
+    public WebElement findFlights;
 
     public FlightFingerPage(WebDriver driver){
         this.driver = driver;
@@ -19,47 +27,9 @@ public class FlightFingerPage {
     }
 
     public boolean displayedImgFlightFinger() {
+
         return imgFlightFinger.isDisplayed();
     }
-
-    @FindBy(xpath = "(//input[@name='tripType'])[1]")
-    WebElement raundTripType;
-
-    @FindBy(xpath = "(//input[@name='tripType'])[2]")
-    WebElement oneWayTripType;
-
-    @FindBy(name = "fromPort")
-    WebElement fromPort;
-
-    @FindBy(name = "fromMonth")
-    WebElement fromMonth;
-
-    @FindBy(name = "fromDay")
-    WebElement fromDay;
-
-    @FindBy(name = "toPort")
-    WebElement toPort;
-
-    @FindBy(name = "toMonth")
-    WebElement toMonth;
-
-    @FindBy(name = "toDay")
-    WebElement toDay;
-
-    @FindBy(xpath = "(//input[@name='servClass'])[1]")
-    WebElement economyServClass;
-
-    @FindBy(xpath = "(//input[@name='servClass'])[2]")
-    WebElement businessServClass;
-
-    @FindBy(xpath = "(//input[@name='servClass'])[3]")
-    WebElement firstServClass;
-
-    @FindBy(name = "airline")
-    WebElement airline;
-
-    @FindBy(name = "findFlights")
-    public WebElement findFlights;
 
     public void selectCities(String cityFrom, String cityTo){
         Select fromPort = new Select(this.fromPort);

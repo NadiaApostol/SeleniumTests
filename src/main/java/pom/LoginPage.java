@@ -11,13 +11,16 @@ public class LoginPage {
     WebDriver driver;
 
     @FindBy(name="userName")
-    WebElement userName;
+    private WebElement userName;
 
     @FindBy(name="password")
-    WebElement Password;
+    private WebElement Password;
 
     @FindBy(name="login")
-    WebElement signIn;
+    private WebElement signIn;
+
+    @FindBy(xpath = "//table[@align='center']//table//a")
+    public List<WebElement> sideMenuItems;
 
     public void login(String login, String password){
         userName.sendKeys(login);
@@ -29,8 +32,4 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
 
     }
-
-    @FindBy(xpath = "//table[@align='center']//table//a")
-    public List<WebElement> sideMenuItems;
-
 }

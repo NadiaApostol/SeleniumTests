@@ -18,9 +18,12 @@ public class FlightConfirmationPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
     public boolean pageFlightConfirmationDisplayed(){
+
         return imgFlightConfirmation.isDisplayed();
     }
+
     public String getTextInformationBilledTo(){
         System.out.println(billedTo.getText());
         return billedTo.getText().replaceAll("[\\n\\t ]", "");

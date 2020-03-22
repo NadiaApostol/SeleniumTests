@@ -1,25 +1,7 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pom.LoginPage;
 
-
-public class SideMenuTests {
-    WebDriver driver;
-    LoginPage objLoginPage;
-
-    @BeforeClass
-    public void signIn() {
-        System.setProperty("webdriver.chrome.driver", "C:\\xyz\\TestyUI\\src\\main\\resources\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("http://newtours.demoaut.com/");
-
-        objLoginPage = new LoginPage(driver);
-        objLoginPage.login("tutorial", "tutorial");
-    }
+public class SideMenuTests extends BaseTest{
 
     @Test
     public void verifySideMenuItems() {
@@ -55,11 +37,6 @@ public class SideMenuTests {
 
             Assert.assertEquals(driver.getCurrentUrl(), baseUrl + navigationSideMenuUrl[i]);
         }
-    }
-
-    @AfterClass
-    public void close() {
-        driver.close();
     }
 
 }
